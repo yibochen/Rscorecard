@@ -21,7 +21,7 @@ m <- data.frame(V=rownames(X),
 N=X[, 3],  P=X[, 3] / X[nrow(X), 3], 
 N0=X[, 1], P0=X[, 1] / X[nrow(X), 1], 
 N1=X[, 2], P1=X[, 2] / X[nrow(X), 2], 
-WOE=NA, IV=NA, BadRate=X[, 1] / X[, 3])
+WOE=NA, IV=NA, BadRate=X[, 2] / X[, 3])
 rownames(m) <- NULL
 m$WOE <- log(m$P1 / m$P0)
 m$WOE[m$P1 == 0 | m$P0 == 0] <- NA
@@ -58,7 +58,7 @@ winDialog('ok', paste('there are only NAs in this variable: ', varname0, sep='')
 # # 如果缺失值有特定含义或者是随机缺失，一般是单独作为一类
 # # 如果是非随机缺失，则看具体情况，有可能删除该条记录
 # # traindata$c_Cat_x1 <- as.character(traindata$c_Cat_x1)
-# # traindata$c_Cat_x1[is.na(traindata$c_Cat_x1)] <- '0: missing'
+# # traindata$c_Cat_x1[is.na(traindata$c_Cat_x1)] <- '000: missing'
 # # traindata$c_Cat_x1 <- as.factor(traindata$c_Cat_x1)
 # # summary(traindata$c_Cat_x1)
 # f_woe(datainput0=traindata, varname0='c_Cat_x1', yname0='bad')
@@ -77,7 +77,7 @@ winDialog('ok', paste('there are only NAs in this variable: ', varname0, sep='')
 # # 如果缺失值有特定含义或者是随机缺失，一般是单独作为一类
 # # 如果是非随机缺失，则看具体情况，有可能删除该条记录
 # # traindata$c_Quan_x1 <- as.character(traindata$c_Quan_x1)
-# # traindata$c_Quan_x1[is.na(traindata$c_Quan_x1)] <- '0: missing'
+# # traindata$c_Quan_x1[is.na(traindata$c_Quan_x1)] <- '000: missing'
 # # traindata$c_Quan_x1 <- as.factor(traindata$c_Quan_x1)
 # # summary(traindata$c_Quan_x1)
 # f_woe(datainput0=traindata, varname0='c_Quan_x1', yname0='bad')
