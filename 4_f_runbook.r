@@ -6,6 +6,33 @@
 f_runbook <- function(datainput1=soft_model_scard){
 # datainput1:  打分的结果数据
 
+print(cor(datainput1$score, rowSums(datainput1[,grep('score_',names(datainput1))])))
+plot(datainput1$score, rowSums(datainput1[,grep('score_',names(datainput1))]))
+
+runbook_pdata <- data.frame(target=datainput1[,1], score=datainput1$score)
+runbook_pdata <- runbook_pdata[runbook_pdata$target %in% c('0','1'),]
+runbook_pdata <- runbook_pdata[order(-runbook_pdata$score),]
+# quantile(runbook_pdata$score,seq(0,1,0.1))
+runbook_pdata$cutscore_10 <- cut(runbook_pdata$score,
+c(0, quantile(runbook_pdata$score,seq(0.1,0.9,0.1)), round(max(runbook_pdata$score)/100+1)*100),right=F)
+summary(runbook_pdata$cutscore_10)
+runbook_p_10 <- data.frame(score=paste('p',seq_len(nlevels(runbook_pdata$cutscore_10)), sep='_'),
+N=0,N1=0,N0=0,odds=0,badrate=0)
+runbook_p_10$N0 <- table(runbook_pdata[,c('target','cutscore_10')])[1,]
+runbook_p_10$N1 <- table(runbook_pdata[,c('target','cutscore_10')])[2,]
+runbook_p_10$N <- table(runbook_pdata[,c('cutscore_10')])
+runbook_p_10 <- runbook_p_10[nrow(runbook_p_10):1, ]
+runbook_p_10$odds <- runbook_p_10$N1 / runbook_p_10$N0
+runbook_p_10$badrate <- runbook_p_10$N1 / runbook_p_10$N
+runbook_p_10$cumsumn <- cumsum(runbook_p_10$N)
+runbook_p_10$cumpn <- cumsum(runbook_p_10$N)/sum(runbook_p_10$N)
+runbook_p_10$cumsum1 <- cumsum(runbook_p_10$N1)
+runbook_p_10$cump1 <- cumsum(runbook_p_10$N1)/sum(runbook_p_10$N1)
+runbook_p_10$cumsum0 <- cumsum(runbook_p_10$N0)
+runbook_p_10$cump0 <- cumsum(runbook_p_10$N0)/sum(runbook_p_10$N0)
+runbook_p_10$ks <- runbook_p_10$cump1 - runbook_p_10$cump0
+print(max(runbook_p_10$ks))
+
 runbookdata <- data.frame(target=datainput1[,1],
 score=rowSums(datainput1[,grep('score_',names(datainput1))]))
 runbookdata <- runbookdata[runbookdata$target %in% c('0','1'),]
@@ -44,7 +71,7 @@ runbook$cump0 <- cumsum(runbook$N0)/sum(runbook$N0)
 runbook$ks <- runbook$cump1 - runbook$cump0
 print(max(runbook$ks))
 
-return(list(runbook_10=runbook_10,runbook=runbook))
+return(list(runbook_p_10=runbook_p_10,runbook_10=runbook_10,runbook=runbook))
 }
 
 # runbook <- f_runbook(datainput1=scard_data[[2]])

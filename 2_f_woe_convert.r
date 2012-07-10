@@ -16,7 +16,7 @@ dataoutput[, j] <- NA
 x <- datainput0[, j]
 y <- datainput0[[yname0]]
 # 中间状态的样本也需要转换WOE
-index <- which(y %in% c(0, 1))
+index <- which(y %in% c(0, 1) & (!is.na(x)))
 x <- x[index]
 y <- factor(y[index])
 X <- addmargins(table(x, y))
@@ -32,8 +32,9 @@ m[, -1] <- round(m[, -1], 4)
 colnames(m) <- c('value', '#Total', '%Total', '#Good', '%Good', '#Bad', '%Bad', 'WOE')
 m$value <- as.character(m$value)
 for(k in 1:(nrow(m) - 1)){
-dataoutput[which(datainput0[, j] == m$value[k]), j] <- m$WOE[k]
+dataoutput[which(datainput0[, j] == m$value[k] & !is.na(datainput0[, j])), j] <- m$WOE[k]
 }
+dataoutput[which(is.na(datainput0[, j])), j] <- 0
 }
 return(dataoutput)
 }
