@@ -1,14 +1,14 @@
-
+ï»¿
 
 ###############################################################################
 ###############################################################################
-# ´Ö·Ö
+# ç²—åˆ†
 f_format <- function(datainput, varname, type=c(1,2), fileout, n_groups=10){
-# datainput: ÊäÈëµÄÊý¾Ý¼¯
-# varname:   ´ý´¦ÀíµÄ±äÁ¿Ãû³Æ,×Ö·û
-# type:      1ÊýÖµ2×Ö·û
-# fileout:   Êä³öµÄÎÄ¼þÃû
-# n_groups:  ·Ö³É¼¸×é
+# datainput: è¾“å…¥çš„æ•°æ®é›†
+# varname:   å¾…å¤„ç†çš„å˜é‡åç§°,å­—ç¬¦
+# type:      1æ•°å€¼2å­—ç¬¦
+# fileout:   è¾“å‡ºçš„æ–‡ä»¶å
+# n_groups:  åˆ†æˆå‡ ç»„
 
 x <- datainput[[varname]]
 
@@ -30,7 +30,7 @@ x_format <- data.frame(y=sort(unique(round(c(
 # -998, -997, 
 max(x, na.rm=T) + 1, -99999,
 quantile(na.rm=T, x[!x %in% c(-997, -998, -999)], seq(0, 1 - 1 / n_groups, 1 / n_groups)))))))
-# ×ó±ÕÓÒ¿ª
+# å·¦é—­å³å¼€
 if(any(is.na(x))){
 x_format <- rbind(x_format, data.frame(y='missing -99999'))
 }
@@ -48,11 +48,11 @@ sink()
 
 ###############################################################################
 ###############################################################################
-# µ¥±äÁ¿WOE£¨Õë¶ÔÒÑ¾­ÀëÉ¢»¯µÄ±äÁ¿£©
+# å•å˜é‡WOEï¼ˆé’ˆå¯¹å·²ç»ç¦»æ•£åŒ–çš„å˜é‡ï¼‰
 f_woe_one <- function(datainput0, varname0, yname0){
-# datainput0: ÊäÈëµÄÊý¾Ý¼¯
-# varname0:   ´ý´¦ÀíµÄ±äÁ¿Ãû³Æ,×Ö·û
-# yname0:     Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
+# datainput0: è¾“å…¥çš„æ•°æ®é›†
+# varname0:   å¾…å¤„ç†çš„å˜é‡åç§°,å­—ç¬¦
+# yname0:     ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
 
 x <- datainput0[[varname0]]
 y <- datainput0[[yname0]]
@@ -86,11 +86,11 @@ return(m)
 
 ###############################################################################
 ###############################################################################
-# µ¥±äÁ¿¿¨·½¼ìÑé£¨Õë¶ÔÒÑ¾­ÀëÉ¢»¯µÄ±äÁ¿£©
+# å•å˜é‡å¡æ–¹æ£€éªŒï¼ˆé’ˆå¯¹å·²ç»ç¦»æ•£åŒ–çš„å˜é‡ï¼‰
 f_chisq_one <- function(datainput0, varname0, yname0){
-# datainput0: ÊäÈëµÄÊý¾Ý¼¯
-# varname0:   ´ý´¦ÀíµÄ±äÁ¿Ãû³Æ,×Ö·û
-# yname0:     Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
+# datainput0: è¾“å…¥çš„æ•°æ®é›†
+# varname0:   å¾…å¤„ç†çš„å˜é‡åç§°,å­—ç¬¦
+# yname0:     ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
 
 x <- datainput0[[varname0]]
 y <- datainput0[[yname0]]
@@ -111,14 +111,14 @@ return(z)
 
 ###############################################################################
 ###############################################################################
-# WOE±¨¸æ(csv°æ±¾),²¢´æ´¢flagÓëwoeµÄ¶ÔÓ¦¹ØÏµ,²¢Éú³ÉIVÓëPÖµµÄÊý¾Ý¼¯
+# WOEæŠ¥å‘Š(csvç‰ˆæœ¬),å¹¶å­˜å‚¨flagä¸Žwoeçš„å¯¹åº”å…³ç³»,å¹¶ç”ŸæˆIVä¸ŽPå€¼çš„æ•°æ®é›†
 f_woe <- function(datainput, filein, yname, filewoe, varlabels, varlist=NA){
-# datainput: ÊäÈëµÄÊý¾Ý¼¯
-# filein:    formatµÄÎÄ¼þÃû
-# yname:     Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
-# filewoe:   woeÊä³öÎÄ¼þÃû
-# varlabels: ÖÐÎÄ±êÇ©
-# varlist:   ´ý´¦ÀíµÄ±äÁ¿
+# datainput: è¾“å…¥çš„æ•°æ®é›†
+# filein:    formatçš„æ–‡ä»¶å
+# yname:     ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
+# filewoe:   woeè¾“å‡ºæ–‡ä»¶å
+# varlabels: ä¸­æ–‡æ ‡ç­¾
+# varlist:   å¾…å¤„ç†çš„å˜é‡
 
 flag_woe_list <- list()
 df_iv_pvalue <- data.frame(var=NULL, IV=NULL, p_value=NULL)
@@ -141,7 +141,7 @@ main <- formatfile[(index_start[i] + 3) : (index_end[i] - 1)]
 datainput[[new_varname]] <- NA
 
 if (is_factor){
-# ×Ö·ûÀàÐÍ
+# å­—ç¬¦ç±»åž‹
 for(j in 1:length(main)){
 main2 <- strsplit(main[j], ' ')[[1]]
 main3 <- main2[main2 != '']
@@ -153,7 +153,7 @@ datainput[[new_varname]] <- as.factor(datainput[[new_varname]])
 }
 
 if (!is_factor){
-# ÊýÖµÀàÐÍ
+# æ•°å€¼ç±»åž‹
 main2 <- unlist(strsplit(main, ' '))
 main3 <- main2[main2 != '']
 main4 <- as.numeric(main3[c(F,T)])
@@ -180,7 +180,7 @@ m1 <- matrix(NA, nrow=4, ncol=11)
 colnames(m1) <- rep('', 11)
 write.table(m, filewoe, append=T, sep=',', row.names=F, na='')
 write.table(m1, filewoe, append=T, sep=',', row.names=F, na='')
-# ÕâÀïµÄwarningÊÇÕý³£µÎ
+# è¿™é‡Œçš„warningæ˜¯æ­£å¸¸æ»´
 
 flag_woe_list[[varname]] <- m
 
@@ -191,22 +191,22 @@ print(c(i,date()))
 }
 
 return(list(data_flag=datainput, flag_woe=flag_woe_list, df_iv_pvalue=df_iv_pvalue))
-# data_flag´æ´¢ÁËÏàÓ¦µÄ·Ö×éÐÅÏ¢,flag_woe´æ´¢ÁË·Ö×éÓëWOEµÄ¶ÔÓ¦,df_iv_pvalue´æ´¢ÁËIVÓëPÖµ
+# data_flagå­˜å‚¨äº†ç›¸åº”çš„åˆ†ç»„ä¿¡æ¯,flag_woeå­˜å‚¨äº†åˆ†ç»„ä¸ŽWOEçš„å¯¹åº”,df_iv_pvalueå­˜å‚¨äº†IVä¸ŽPå€¼
 }
 
 
 
 ###############################################################################
 ###############################################################################
-# WOEµ÷Õû(²¢ÇÒÔÝÊ±ÓÃÀ´Éú³ÉWOE±¨¸æ(knitr))
+# WOEè°ƒæ•´(å¹¶ä¸”æš‚æ—¶ç”¨æ¥ç”ŸæˆWOEæŠ¥å‘Š(knitr))
 f_woe_adj <- function(datainput, filein, varname, type=c(1,2), yname, varlabels=NULL, is_complete=F){
-# datainput:   ÊäÈëµÄÊý¾Ý¼¯
-# filein:      formatµÄÎÄ¼þÃû
-# varname:     ´ý´¦ÀíµÄ±äÁ¿Ãû³Æ,×Ö·û
-# type:        1ÊýÖµ 2×Ö·û
-# yname:       Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
-# varlabels:   ÖÐÎÄ±êÇ©
-# is_complete: ÊÇ·ñÊä³öÈ«²¿×Ö¶Î.Ä¬ÈÏÖ»Êä³öFreq,WOEºÍIV¡£
+# datainput:   è¾“å…¥çš„æ•°æ®é›†
+# filein:      formatçš„æ–‡ä»¶å
+# varname:     å¾…å¤„ç†çš„å˜é‡åç§°,å­—ç¬¦
+# type:        1æ•°å€¼ 2å­—ç¬¦
+# yname:       ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
+# varlabels:   ä¸­æ–‡æ ‡ç­¾
+# is_complete: æ˜¯å¦è¾“å‡ºå…¨éƒ¨å­—æ®µ.é»˜è®¤åªè¾“å‡ºFreq,WOEå’ŒIVã€‚
 
 formatfile <- readLines(filein)
 index_var <- grep(paste('"', varname, '"', sep=''), formatfile)
@@ -217,7 +217,7 @@ new_varname <- paste('flag_', varname, sep='')
 datainput[[new_varname]] <- NULL
 
 if (type == 2){
-# ×Ö·ûÀàÐÍ
+# å­—ç¬¦ç±»åž‹
 if(length(grep('missing', main)) == 1){
 main2 <- strsplit(main[grep('missing', main)], ' ')[[1]]
 main3 <- main2[main2 != '']
@@ -233,7 +233,7 @@ datainput[[new_varname]] <- as.factor(datainput[[new_varname]])
 }
 
 if (type == 1){
-# ÊýÖµÀàÐÍ
+# æ•°å€¼ç±»åž‹
 datainput$tttmp <- datainput[[varname]]
 if(length(grep('missing', main)) == 1){
 main2 <- unlist(strsplit(main[grep('missing', main)], ' '))
@@ -276,13 +276,13 @@ cat('\n', 'chisq_test: p_value = ', chisq_p, '\n')
 }
 
 
-# WOEÇÐ¸î£¬·µ»ØÇÐ¸îºÃµÄ±äÁ¿
+# WOEåˆ‡å‰²ï¼Œè¿”å›žåˆ‡å‰²å¥½çš„å˜é‡
 f_woe_cut <- function(datainput0, datatrain0=datainput0, filein0, yname0='bad'){
 
-# datainput0:   ÊäÈëµÄÊý¾Ý¼¯
-# datatrain0:   ÑµÁ·Ñù±¾
-# filein0:      formatµÄÎÄ¼þÃû
-# yname0:       Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
+# datainput0:   è¾“å…¥çš„æ•°æ®é›†
+# datatrain0:   è®­ç»ƒæ ·æœ¬
+# filein0:      formatçš„æ–‡ä»¶å
+# yname0:       ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
 
 formatfile <- readLines(filein0)
 index_start <- grep('# this is the start of a variable', formatfile)
@@ -298,7 +298,7 @@ new_varname <- paste('woeflag_', varname, sep='')
 datainput0[[new_varname]] <- NA
 
 if (is_factor){
-# ×Ö·ûÀàÐÍ
+# å­—ç¬¦ç±»åž‹
 datainput0[[varname]][!datainput0[[varname]] %in% datatrain0[[varname]]] <- NA
 if(length(grep('missing', main)) == 1){
 main2 <- strsplit(main[grep('missing', main)], ' ')[[1]]
@@ -314,7 +314,7 @@ datainput0[[new_varname]] <- as.factor(datainput0[[new_varname]])
 }
 
 if (!is_factor){
-# ÊýÖµÀàÐÍ
+# æ•°å€¼ç±»åž‹
 datainput0[[varname]][datainput0[[varname]] > max(datatrain0[[varname]], na.rm=T) & 
 !is.na(datainput0[[varname]])] <- max(datatrain0[[varname]], na.rm=T)
 datainput0[[varname]][datainput0[[varname]] < min(datatrain0[[varname]], na.rm=T) & 
@@ -340,12 +340,12 @@ return(datainput0[,grep(paste(yname0, '|woeflag_', sep=''), names(datainput0))])
 }
 
 
-# WOE×ª»»
+# WOEè½¬æ¢
 f_woe_convert <- function(datatrain, datatest, yname='bad'){
 
-# datatrain:   ÑµÁ·Ñù±¾
-# datatest:    ²âÊÔÑù±¾
-# yname:       Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1ºÃ0»µ(ÆÀ·Ö¿¨×¨ÓÃ)
+# datatrain:   è®­ç»ƒæ ·æœ¬
+# datatest:    æµ‹è¯•æ ·æœ¬
+# yname:       ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å¥½0å(è¯„åˆ†å¡ä¸“ç”¨)
 
 data_train_cut <- f_woe_cut(datainput0=datatrain, datatrain0=datatrain, filein0=filein, yname0='bad')
 data_test_cut <- f_woe_cut(datainput0=datatest, datatrain0=datatrain, filein0=filein, yname0='bad')
@@ -368,7 +368,7 @@ data_test_woe=data_test_cut[,grep(paste(yname, '|woe_woeflag_', sep=''), names(d
 }
 
 
-# Ä£ÐÍÆÀ¼Û
+# æ¨¡åž‹è¯„ä»·
 f_model_eval <- function(model, trainset, testset, yname='bad'){
 require(ROCR)
 require(rpart)
@@ -395,7 +395,7 @@ print(max(attr(perf, 'y.values')[[1]] - attr(perf, 'x.values')[[1]]))
 
 
 
-# ¾ö²ßÊ÷¹æÔò
+# å†³ç­–æ ‘è§„åˆ™
 f_tree2rules <- function(model, labeled=F){
 require(rpart)
 if(!inherits(model, "rpart"))stop("Not a legitimate rpart tree")

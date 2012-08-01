@@ -1,16 +1,16 @@
-
+ï»¿
 
 ###############################################################################
 ###############################################################################
-# µ¥±äÁ¿WOE£¨Õë¶ÔÒÑ¾­ÀëÉ¢»¯µÄ±äÁ¿£©
+# å•å˜é‡WOEï¼ˆé’ˆå¯¹å·²ç»ç¦»æ•£åŒ–çš„å˜é‡ï¼‰
 f_woe <- function(datainput0, varname0, yname0='bad'){
-# datainput0: ÊäÈëµÄÊý¾Ý¼¯
-# varname0:   ´ý´¦ÀíµÄ±äÁ¿Ãû³Æ,×Ö·û
-# yname0:     Ä¿±ê±äÁ¿Ãû³Æ,×Ö·û,1»µ0ºÃ(ÆÀ·Ö¿¨×¨ÓÃ)
+# datainput0: è¾“å…¥çš„æ•°æ®é›†
+# varname0:   å¾…å¤„ç†çš„å˜é‡åç§°,å­—ç¬¦
+# yname0:     ç›®æ ‡å˜é‡åç§°,å­—ç¬¦,1å0å¥½(è¯„åˆ†å¡ä¸“ç”¨)
 
 x <- datainput0[[varname0]]
 y <- datainput0[[yname0]]
-# ×Ô±äÁ¿²»ÄÜÎªÈ±Ê§Öµ£¬Èç¹ûÐèÒª£¬Ó¦ÔÚÖ®Ç°·Ö×éÊ±¾Í´¦ÀíºÃ¡£
+# è‡ªå˜é‡ä¸èƒ½ä¸ºç¼ºå¤±å€¼ï¼Œå¦‚æžœéœ€è¦ï¼Œåº”åœ¨ä¹‹å‰åˆ†ç»„æ—¶å°±å¤„ç†å¥½ã€‚
 index <- which(y %in% c(0, 1) & (!is.na(x)))
 x <- x[index]
 y <- factor(y[index])
@@ -45,37 +45,37 @@ winDialog('ok', paste('there are only NAs in this variable: ', varname0, sep='')
 
 }
 
-# # traindataÊÇÑµÁ·¼¯
+# # traindataæ˜¯è®­ç»ƒé›†
 # names(traindata)
 
-# # ÀëÉ¢±äÁ¿ÇéÐÎ
+# # ç¦»æ•£å˜é‡æƒ…å½¢
 # summary(traindata$Cat_x1)
 # traindata$c_Cat_x1 <- as.factor(traindata$Cat_x1)
 # summary(traindata$c_Cat_x1)
 # # levels(traindata$c_Cat_x1) <- paste(1:nlevels(traindata$c_Cat_x1), 
 # # levels(traindata$c_Cat_x1), sep=': ')
 # # summary(traindata$c_Cat_x1)
-# # Èç¹ûÈ±Ê§ÖµÓÐÌØ¶¨º¬Òå»òÕßÊÇËæ»úÈ±Ê§£¬Ò»°ãÊÇµ¥¶À×÷ÎªÒ»Àà
-# # Èç¹ûÊÇ·ÇËæ»úÈ±Ê§£¬Ôò¿´¾ßÌåÇé¿ö£¬ÓÐ¿ÉÄÜÉ¾³ý¸ÃÌõ¼ÇÂ¼
+# # å¦‚æžœç¼ºå¤±å€¼æœ‰ç‰¹å®šå«ä¹‰æˆ–è€…æ˜¯éšæœºç¼ºå¤±ï¼Œä¸€èˆ¬æ˜¯å•ç‹¬ä½œä¸ºä¸€ç±»
+# # å¦‚æžœæ˜¯éžéšæœºç¼ºå¤±ï¼Œåˆ™çœ‹å…·ä½“æƒ…å†µï¼Œæœ‰å¯èƒ½åˆ é™¤è¯¥æ¡è®°å½•
 # # traindata$c_Cat_x1 <- as.character(traindata$c_Cat_x1)
 # # traindata$c_Cat_x1[is.na(traindata$c_Cat_x1)] <- '000: missing'
 # # traindata$c_Cat_x1 <- as.factor(traindata$c_Cat_x1)
 # # summary(traindata$c_Cat_x1)
 # f_woe(datainput0=traindata, varname0='c_Cat_x1', yname0='bad')
 
-# # Á¬Ðø±äÁ¿ÇéÐÎ
+# # è¿žç»­å˜é‡æƒ…å½¢
 # summary(traindata$Quan_x1)
 # plot(density(na.omit(traindata$Quan_x1)))
 # quantile(traindata$Quan_x1, seq(0,1,0.1), na.rm=T)
-# ¸ù¾ÝÉÏÊö·ÖÎ»Êý
+# æ ¹æ®ä¸Šè¿°åˆ†ä½æ•°
 # traindata$c_Quan_x1 <- cut(traindata$Quan_x1, c(0,5,15,40,100), 
 # right=T, include.lowest=T)
 # summary(traindata$c_Quan_x1)
 # # levels(traindata$c_Quan_x1) <- paste(1:nlevels(traindata$c_Quan_x1), 
 # # levels(traindata$c_Quan_x1), sep=': ')
 # # summary(traindata$c_Quan_x1)
-# # Èç¹ûÈ±Ê§ÖµÓÐÌØ¶¨º¬Òå»òÕßÊÇËæ»úÈ±Ê§£¬Ò»°ãÊÇµ¥¶À×÷ÎªÒ»Àà
-# # Èç¹ûÊÇ·ÇËæ»úÈ±Ê§£¬Ôò¿´¾ßÌåÇé¿ö£¬ÓÐ¿ÉÄÜÉ¾³ý¸ÃÌõ¼ÇÂ¼
+# # å¦‚æžœç¼ºå¤±å€¼æœ‰ç‰¹å®šå«ä¹‰æˆ–è€…æ˜¯éšæœºç¼ºå¤±ï¼Œä¸€èˆ¬æ˜¯å•ç‹¬ä½œä¸ºä¸€ç±»
+# # å¦‚æžœæ˜¯éžéšæœºç¼ºå¤±ï¼Œåˆ™çœ‹å…·ä½“æƒ…å†µï¼Œæœ‰å¯èƒ½åˆ é™¤è¯¥æ¡è®°å½•
 # # traindata$c_Quan_x1 <- as.character(traindata$c_Quan_x1)
 # # traindata$c_Quan_x1[is.na(traindata$c_Quan_x1)] <- '000: missing'
 # # traindata$c_Quan_x1 <- as.factor(traindata$c_Quan_x1)

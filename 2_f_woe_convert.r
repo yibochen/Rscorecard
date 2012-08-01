@@ -1,11 +1,11 @@
-
+Ôªø
 
 ###############################################################################
 ###############################################################################
-# WOE◊™ªª
+# WOEËΩ¨Êç¢
 f_woe_convert <- function(datainput0, yname0='bad'){
-# datainput0:  ‰»Îµƒ ˝æ›ºØ(÷ª∞¸∫¨‘§≤‚ƒø±Íº∞ ‰»Î±‰¡ø)
-# yname0:     ƒø±Í±‰¡ø√˚≥∆,◊÷∑˚,1ªµ0∫√(∆¿∑÷ø®◊®”√)
+# datainput0: ËæìÂÖ•ÁöÑÊï∞ÊçÆÈõÜ(Âè™ÂåÖÂê´È¢ÑÊµãÁõÆÊ†áÂèäËæìÂÖ•ÂèòÈáè)
+# yname0:     ÁõÆÊ†áÂèòÈáèÂêçÁß∞,Â≠óÁ¨¶,1Âùè0Â•Ω(ËØÑÂàÜÂç°‰∏ìÁî®)
 
 dataoutput <- datainput0
 names(dataoutput)[which(names(datainput0) != yname0)] <- 
@@ -15,7 +15,7 @@ for(j in which(names(datainput0) != yname0)){
 dataoutput[, j] <- NA
 x <- datainput0[, j]
 y <- datainput0[[yname0]]
-# ÷–º‰◊¥Ã¨µƒ—˘±æ“≤–Ë“™◊™ªªWOE
+# ‰∏≠Èó¥Áä∂ÊÄÅÁöÑÊ†∑Êú¨‰πüÈúÄË¶ÅËΩ¨Êç¢WOE
 index <- which(y %in% c(0, 1) & (!is.na(x)))
 x <- x[index]
 y <- factor(y[index])
@@ -39,6 +39,6 @@ dataoutput[which(is.na(datainput0[, j])), j] <- 0
 return(dataoutput)
 }
 
-# # traindata_filtered «æ≠π˝±‰¡ø…∏—°µƒ—µ¡∑ºØ
+# # traindata_filteredÊòØÁªèËøáÂèòÈáèÁ≠õÈÄâÁöÑËÆ≠ÁªÉÈõÜ
 # traindata_woe <- f_woe_convert(datainput0=na.omit(traindata_filtered), yname0='bad'){
 

@@ -1,10 +1,10 @@
-
+ï»¿
 
 ###############################################################################
 ###############################################################################
 # runbook
 f_runbook <- function(datainput1=soft_model_scard){
-# datainput1:  ´ò·ÖµÄ½á¹ûÊý¾Ý
+# datainput1:  æ‰“åˆ†çš„ç»“æžœæ•°æ®
 
 print(cor(datainput1$score, rowSums(datainput1[,grep('score_',names(datainput1))])))
 plot(datainput1$score, rowSums(datainput1[,grep('score_',names(datainput1))]))

@@ -1,12 +1,12 @@
-
+ï»¿
 
 ###############################################################################
 ###############################################################################
-# ×öÆÀ·Ö¿¨²¢´ò·Ö
+# åšè¯„åˆ†å¡å¹¶æ‰“åˆ†
 f_scard <- function(datainput1=soft_model_scard, varid=2:ncol(datainput1), model1=model_choose){
-# datainput1: ÊäÈëµÄÊý¾Ý¼¯(Ö»°üº¬Ô¤²âÄ¿±ê(µÚÒ»ÁÐ)¼°ÒÑ¾­·Ö×éµÄÊäÈë±äÁ¿)
-# varid:      ×Ô±äÁ¿ËùÔÚÁÐ
-# model1:     Ñ¡ÓÃµÄÄ£ÐÍ
+# datainput1: è¾“å…¥çš„æ•°æ®é›†(åªåŒ…å«é¢„æµ‹ç›®æ ‡(ç¬¬ä¸€åˆ—)åŠå·²ç»åˆ†ç»„çš„è¾“å…¥å˜é‡)
+# varid:      è‡ªå˜é‡æ‰€åœ¨åˆ—
+# model1:     é€‰ç”¨çš„æ¨¡åž‹
 
 m1 <- matrix(NA, nrow=2, ncol=11)
 m1 <- as.data.frame(m1)
